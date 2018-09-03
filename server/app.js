@@ -25,8 +25,8 @@ app.get('/', (req, res) => {
     res.send('Greetings, young one!');
 });
 
-app.listen(3000, () => {
-    console.log('Server started; listening on port 3000');
+app.listen(process.env.PORT || 3000, () => {
+    console.log(`Server started; listening on port ${process.env.PORT || 3000}`);
 
     let dbCon = new DbConnector();
     dbCon.connect()
