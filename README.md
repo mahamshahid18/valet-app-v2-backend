@@ -28,7 +28,7 @@
 * ~Add catchError calls to all methods in `DataService`~
 * ~Fix styling of notification card (width)~
 * ~Remove capitalization styling for inputs~
-* Make ticket-verification page height max 100vh
+* ~Make ticket-verification page height max 100vh [not needed]~
 * ~In ticket generation form, remove dashes from car reg no and make it uppercase before sending to backend~
 * ~For valet and user auth, for incorrect credentials, don't navigate to 404 page, instead show error message~
 * ~Add loading animation when sending data to or fetching data from backend~
