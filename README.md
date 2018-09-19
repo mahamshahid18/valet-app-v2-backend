@@ -1,34 +1,23 @@
-# TODO's
+# Valet Ticketing Application 🚙🅿🎫
 
-## Server
+You can [**view details about this application here**](https://github.com/mahamshahid18/valet-app-v2). This document only discusses the backend implementation for the application.
 
-* ~Replace mongoose with mongo db native driver to get rid of deprecation messages [mongoose downgraded to 5.2.8]~
-* ~Move routes to their specific files and use router in app.js instead~
-* ~Create POSTMAN tests for all endpoints~
-* ~Use generic error handler~
-* ~Make internal routes auth protected routes~
-* ~Implement authentication and authorization~
-* ~Add authentication flow for valet to generate tickets~
-* ~Add issuer and audience field to auth token's header [moved to next iteration]~
-* ~Add route for valet authentication~
-* ~Add route for valet authorization (verification)~
-* ~Add proper error objects to calls that fail due to db errors (check POST/ticket endpoint for reference)~
+## Backend Implementation 👩‍💻
+I decided to make the backend as a REST API, implemented using Node.js and Express. The database that I used in the first version was MySQL but I switched to MongoDB in this version due to its flexibility - which was suitable for this case. For the ticket propagation, I decided to use Twilio SMS API.
 
-## Front-end
+### App Structure 📂
+The backend app has been split into various logically related parts, to practice **separation of concerns**. The express application uses `middleware` for related endpoints. The app contains the following parts/modules:
 
-* ~Add styling to all forms~
-* ~Add validation styles to all forms~
-* ~Add validation checks to user login form~
-* ~Add validation checks to valet login form~
-* ~Add validation checks to ticket creation form~
-* ~Add notification service to display info/error messages~
-* ~Add route (component) for handling 401 (unauthorized request) error~
-* ~Add error handler to data service to redirect to the unauthorized url when the 401 error is returned from http call~
-* ~Add error handler to auth service to redirect to the unauthorized url when the 401 error is returned from http call~
-* ~Add catchError calls to all methods in `DataService`~
-* ~Fix styling of notification card (width)~
-* ~Remove capitalization styling for inputs~
-* ~Make ticket-verification page height max 100vh [not needed]~
-* ~In ticket generation form, remove dashes from car reg no and make it uppercase before sending to backend~
-* ~For valet and user auth, for incorrect credentials, don't navigate to 404 page, instead show error message~
-* ~Add loading animation when sending data to or fetching data from backend~
+* **`auth`**: contains an **`AuthController`** which acts as middleware for authentication related endpoints. There is also a **`TokenCheck`** module available which is for validating tokens sent by the client (authorization)
+* **`db`**: contains a module which deals with database connection
+* **`error`**: contains a module which acts as a generic error handler. It is used as error handling middleware in the whole application
+* **`qrcode`**: contains the **`QrCodeController`** which groups together endpoints for generating qrcode for ticket verification
+* **`ticket`**: contains a module which groups together the endpoint for generating a valet ticket, as well as the functionality for sending out text messages
+* **`user`**: contains a **`User`** file which defines the structure for a user object (to be stored in the db), i.e it defines a schema for usage with mongooge. There is also a `UserController` which acts as middleware for all endpoints related to the user actions
+* **`valet`**: contains a **`Valet`** file which defines the structure for a valet object (to be stored in the db), i.e it defines a schema for usage with mongooge. There is also a `ValetController` which acts as middleware for all endpoints related to the valet
+
+### REST API Testing 🌧️
+Endpoints exposed in the REST API were tested using [**Postman Client**](https://www.getpostman.com/).
+
+## Backend Deployment ☁️
+The backend is deployed on Heroku cloud.
