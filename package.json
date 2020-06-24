@@ -14,7 +14,7 @@
     "cors": "^2.8.4",
     "dotenv": "^6.0.0",
     "express": "^4.16.3",
-    "helmet": "^3.13.0",
+    "helmet": "^3.23.2",
     "jsonwebtoken": "^8.3.0",
     "mongoose": "^5.2.8",
     "twilio": "^3.19.1"
